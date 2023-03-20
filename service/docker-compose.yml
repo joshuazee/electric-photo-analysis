@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  #    translate:
+  #        image: nginx
+  #        container_name: nginx-for-NLB
+  #        restart: always
+  #        ports:
+  #            - "8090:80"
+  #        volumes:
+  # - /nginx.conf:/etc/nginx/nginx.conf
+  #            - /log:/var/log/nginx
+  #            - /web:/usr/share/nginx/html
+  restful-service:
+    image: sss-fastapi-service
+    container_name: fastapi-restful-api
+    restart: always
+    environment:
+      PORT: 8080
+    ports:
+      - "9001:8080"

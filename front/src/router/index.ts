@@ -22,7 +22,7 @@ const routes: Array<RouteRecordRaw> = [
       {
         path: '/main/home',
         name: 'home',
-        component: () => import('@/pages/home/index.vue')
+        component: () => import('@/pages/main/home.vue')
       }
     ]
   }
@@ -37,7 +37,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isLogin = useLocalStorage<boolean>('is-login', false)
+  const isLogin = useLocalStorage<boolean>('is-login-ele', false)
   if (isLogin.value === true || to.name === 'login') {
     next()
   } else {
