@@ -6,7 +6,7 @@
     >
       <div style="display: flex">
         <img src="/img/logo2.png" style="height: 60px; width: 72px" />
-        <span style="color: #fff; font-size: 32px">电力系统机巡影像缺陷隐患智能识别系统</span>
+        <!-- <span style="color: #fff; font-size: 32px">电力系统机巡影像缺陷隐患智能识别系统</span> -->
       </div>
       <div class="close" @click="quit">
         <poweroff-outlined style="font-size: 32px; color: #fff" />

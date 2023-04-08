@@ -1,6 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, File, UploadFile
 from starlette.requests import Request
 from app.controllers.file import FileController as controller
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -8,14 +9,20 @@ tags = ['File Doc']
 
 prefix = '/file'
 
-@router.get("/get/{url}")
-async def do_get(url: str, request: Request):
-  return await controller.get(url)
+class RunParam(BaseModel):
+  imgs: list[str] = []
 
+@router.get("/get")
+async def do_get(request: Request):
+  return await controller.get(request.query_params["path"])
 
 @router.post("/upload")
-async def do_post(request: Request):
-  return await controller.insert(request.query_params)
+async def do_post(file: UploadFile = File(...)):
+  return await controller.upload(file)
+
+@router.post("/run")
+async def do_run(param: RunParam):
+  return await controller.run(param.imgs)
 
 
 # @router.put("/{id}")
