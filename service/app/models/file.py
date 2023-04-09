@@ -5,11 +5,12 @@ from starlette.responses import StreamingResponse
 import uuid
 import sys,os
 
-sys.path.append(os.path.realpath(r'../../../tmp'))
-from test1 import test
+# sys.path.append(os.path.realpath(r'../tmp'))
+# from test1 import test
 
 def find_file(url):
-  filename = os.path.realpath(r'../../../tmp')+'/'+url
+  print(os.path.realpath(r'./'))
+  filename = os.path.realpath(r'../tmp')+'/'+url
   content_type = get_content_type(url)
   response = StreamingResponse(get_file_byte(filename), headers={"Content-Type":content_type})
   return response
@@ -37,7 +38,7 @@ def get_content_type(filename:str):
 async def upload_file(file: UploadFile):
   print(os.path.realpath(r'../'))
   result = []
-  save_path = os.path.realpath(r'../../../tmp/')
+  save_path = os.path.realpath(r'../tmp/')
   dir_path = str(uuid.uuid4()) + '/'
   save_path += "/"+ dir_path
   if not os.path.exists(save_path):
@@ -50,5 +51,6 @@ async def upload_file(file: UploadFile):
   result.append({"msg": f'{file.filename}上传成功', 'path': dir_path+file.filename})
   return result
 
-def run(imgs:list[str]):
-   return test(imgs, os.path.realpath(r'../../../tmp/save_dir'))
+def run(imgs:List[str]):
+    print(os.path.realpath(r'./'))
+#    return test(imgs, os.path.realpath(r'../tmp/save_dir'))

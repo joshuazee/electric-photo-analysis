@@ -1,7 +1,7 @@
-from app.response import success_response, error_response
-from app.models.file import find_file,upload_file,run
+from response import success_response, error_response
+from models.file import find_file,upload_file,run
 from fastapi import UploadFile, File
-
+from typing import List
 
 class FileController:
   @staticmethod
@@ -23,7 +23,7 @@ class FileController:
     return response
   
   @staticmethod
-  async def run(imgs:list[str] = []):
+  async def run(imgs:List[str] = []):
     try:
       results=run(imgs)
       response = success_response(results)

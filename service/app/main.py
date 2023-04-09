@@ -8,7 +8,7 @@ from fastapi import FastAPI
 # from app.core.config import get_app_settings
 # from app.core.events import create_start_app_handler, create_stop_app_handler
 
-from app.routes import routes
+from routes import routes
 
 import uvicorn
 
@@ -61,4 +61,4 @@ for item in routes:
 
 
 if __name__ == '__main__':
-    uvicorn.run(app=app, host="127.0.0.1", port=8080, log_level="info", debug=True)
+    uvicorn.run(app=app, host="127.0.0.1", port=9527, log_level="info", debug=True)
