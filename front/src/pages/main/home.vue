@@ -15,11 +15,11 @@
           点击上传
         </a-button>
       </a-upload>
-      <a-button>杆塔</a-button>
-      <a-button>导地线</a-button>
-      <a-button>绝缘子</a-button>
-      <a-button>金属</a-button>
-      <a-button>综合</a-button>
+      <a-button @click="handleAnalysisPics">杆塔</a-button>
+      <a-button @click="handleAnalysisPics">导地线</a-button>
+      <a-button @click="handleAnalysisPics">绝缘子</a-button>
+      <a-button @click="handleAnalysisPics">金属</a-button>
+      <a-button @click="handleAnalysisPics">综合</a-button>
       <a-button type="primary" @click="handleAnalysisPics">批处理</a-button>
     </a-row>
     <a-row style="margin-top: 10px">
@@ -30,13 +30,13 @@
           :data-source="successFileList"
           style="margin: 0 10px; max-height: 385px"
         >
-          <template #renderItem="{ item }">
+          <template #renderItem="{ item, index }">
             <a-list-item
               :class="{
                 'file-list-item': true,
                 'file-list-item-active': activeFile.name === item.name
               }"
-              @click="changeFileActive(item)"
+              @click="changeFileActive(item, index)"
             >
               <span>{{ item.name }}</span>
               <DeleteOutlined @click="handleRemoveFile(item)" />
@@ -93,7 +93,9 @@ import { DeleteOutlined, UploadOutlined } from '@ant-design/icons-vue'
 import type { UploadChangeParam } from 'ant-design-vue'
 import axios from 'axios'
 
+const resultList = ref<Array<any>>([])
 const resultText = ref<string>('')
+
 const headers = {}
 const fileList = ref([])
 const activeFile = ref<any>({})
@@ -109,10 +111,13 @@ const handleChange = (info: UploadChangeParam) => {
   // }
 }
 
-const changeFileActive = (file: any) => {
+const changeFileActive = (file: any, index: number) => {
   console.log(file)
   if (file.name !== activeFile.name) {
     activeFile.value = file
+    if (resultList.value.length > index) {
+      resultText.value = JSON.stringify(resultList.value[index])
+    }
   }
 }
 
@@ -149,7 +154,8 @@ const handleAnalysisPics = () => {
     .then((response) => {
       const result = response.data
       if (result.code === 200) {
-        resultText.value = result.data
+        console.log(result.data)
+        resultList.value = result.data
       }
       console.log(result)
     })

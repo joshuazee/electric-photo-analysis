@@ -39,10 +39,12 @@ async def upload_file(file: UploadFile):
   print(os.path.realpath(r'../'))
   result = []
   save_path = os.path.realpath(r'../tmp/')
+  if not os.path.exists(save_path):
+     os.mkdir(save_path)
   dir_path = str(uuid.uuid4()) + '/'
   save_path += "/"+ dir_path
   if not os.path.exists(save_path):
-      os.mkdir(save_path)
+    os.mkdir(save_path)
   save_file = os.path.join(save_path, file.filename)
   f = open(save_file, 'wb')
   data = await file.read()
@@ -53,4 +55,6 @@ async def upload_file(file: UploadFile):
 
 def run(imgs:List[str]):
     print(os.path.realpath(r'./'))
+    result = [[{'clsName': 'dachicun', 'Bbox': [[552.18115234375, 2324.040283203125, 1134.75, 2623.231201171875], [4122.33544921875, 2009.338134765625, 4746.94873046875, 2227.914794921875]], 'Score': [0.9792472720146179, 0.9610798954963684]}], [{'clsName': 'dachicun', 'Bbox': [[4360.65576171875, 3169.44140625, 4863.0, 3385.9765625]], 'Score': [0.8596624135971069]}], [], [], [], [], [], [{'clsName': 'dachicun', 'Bbox': [[575.4486083984375, 3180.635009765625, 1193.9344482421875, 3394.311279296875]], 'Score': [0.9440523982048035]}], [{'clsName': 'jueyuanzi', 'Bbox': [[2589.382080078125, 1990.250244140625, 2934.481689453125, 3647.0]], 'Score': [0.9575200080871582]}]]
+    return result
 #    return test(imgs, os.path.realpath(r'../tmp/save_dir'))
