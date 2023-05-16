@@ -5,9 +5,9 @@ from typing import List
 
 class FileController:
   @staticmethod
-  async def get(url):
+  async def get(url, flag):
     try:
-      results = find_file(url)
+      results = find_file(url, flag)
     except:
       response = error_response(error="获取文件失败")
       return response

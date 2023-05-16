@@ -15,7 +15,7 @@ class RunParam(BaseModel):
 
 @router.get("/get")
 async def do_get(request: Request):
-  return await controller.get(request.query_params["path"])
+  return await controller.get(request.query_params["path"], bool(request.query_params["flag"]))
 
 @router.post("/upload")
 async def do_post(file: UploadFile = File(...)):
